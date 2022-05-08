@@ -40,7 +40,7 @@ model employees {
   offices         offices     @relation(fields: [officeCode], references: [officeCode], onDelete: NoAction, onUpdate: NoAction, map: "employees_ibfk_2")
   employees       employees?  @relation("employeesToemployees_reportsTo", fields: [reportsTo], references: [employeeNumber], onDelete: NoAction, onUpdate: NoAction, map: "employees_ibfk_1")
   customers       customers[]
-  other_employees employees[] @relation("employeesToemployees_reportsTo")
+  otherEmployees employees[] @relation("employeesToemployees_reportsTo")
 
   @@index([officeCode], map: "officeCode")
   @@index([reportsTo], map: "reportsTo")
@@ -113,7 +113,7 @@ model products {
   productDescription String         @db.Text
   quantityInStock    Int            @db.SmallInt
   buyPrice           Decimal        @db.Decimal(10, 2)
-  MSRP               Decimal        @db.Decimal(10, 2)
+  msrp               Decimal        @db.Decimal(10, 2) @map("MSRP")
   productlines       productlines   @relation(fields: [productLine], references: [productLine], onDelete: NoAction, onUpdate: NoAction, map: "products_ibfk_1")
   orderdetails       orderdetails[]
 
